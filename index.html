@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <script>
-        console.log("Hello World");
 
         const ROCK = "Rock";
         const PAPER = "Paper";
@@ -85,6 +84,8 @@
             }
         }
 
+        let humanChoice;
+        let computerChoice;
         //let humanChoice = getHumanChoice();
         //let computerChoice = getComputerChoice();
         //console.log(playRound(humanChoice, computerChoice));
@@ -96,14 +97,75 @@
                 console.log(playRound(humanChoice, computerChoice));
                 console.log("Human : " + humanScore + " - Computer : " + computerScore + ".");
             }
-        };
 
-        playGame();
+        };
+        //playGame();
     </script>
 </head>
 
 <body>
+    <button id="rockButton">Rock</button>
+    <button id="paperButton">Paper</button>
+    <button id="scissorsButton">Scissiors</button>
 
+    <div id="scoreBox"></div>
+    <div id="resultBox"></div>
+
+    <script>
+        let rb = document.querySelector("#rockButton");
+        let pb = document.querySelector("#paperButton");
+        let sb = document.querySelector("#scissorsButton");
+        let scoreBox = document.querySelector("#scoreBox");
+        scoreBox.style.backgroundColor = "yellow";
+        let resultBox = document.querySelector("#resultBox");
+
+        let isGameOver = false;
+
+        function displayScore() {
+            scoreBox.textContent = "Human : " + humanScore + " - Computer : " + computerScore + ".";
+        };
+
+        rb.addEventListener("click", () => {
+            if (!isGameOver) {
+                humanChoice = ROCK;
+                computerChoice = getComputerChoice();
+                resultBox.textContent = playRound(humanChoice, computerChoice);
+                displayScore();
+                checkGameOver();
+            }
+        });
+        pb.addEventListener("click", () => {
+            if (!isGameOver) {
+                humanChoice = PAPER;
+                computerChoice = getComputerChoice();
+                resultBox.textContent = playRound(humanChoice, computerChoice);
+                displayScore();
+                checkGameOver();
+            }
+        });
+        sb.addEventListener("click", () => {
+            if (!isGameOver) {
+                humanChoice = SCISSORS;
+                computerChoice = getComputerChoice();
+                resultBox.textContent = playRound(humanChoice, computerChoice);
+                displayScore();
+                checkGameOver();
+            }
+        });
+
+        displayScore();
+        const MAX_SCORE = 5;
+        function checkGameOver() {
+            if (humanScore >= MAX_SCORE) {
+                resultBox.textContent = "human wins!";
+                isGameOver = true;
+            }
+            if (computerScore >= MAX_SCORE) {
+                resultBox.textContent = "computer wins!";
+                isGameOver = true;
+            }
+        }
+    </script>
 </body>
 
 </html>
